@@ -14,8 +14,18 @@ class EnhanTodo extends StatelessWidget {
       accentColor: Colors.green,
     ),
     home: Scaffold(
-      appBar: AppBar(
-        title: const Text('EnhanTodo'),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          const SliverAppBar(
+            flexibleSpace: const FlexibleSpaceBar(
+              title: Text('EnhanTodo'),
+            ),
+            stretch: false,
+            floating: true,
+            pinned: false,
+            snap: false,
+          )
+        ],
       ),
       drawer: _DrawerWidget(),
     ),
