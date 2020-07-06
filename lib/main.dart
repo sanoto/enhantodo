@@ -20,6 +20,32 @@ class EnhanTodo extends StatelessWidget {
         appBar: AppBar(
           title: const Text('EnhanTodo'),
         ),
+        drawer: Drawer(
+          child: Builder(
+            builder: (BuildContext context) => ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Text(
+                    'EnhanTodo',
+                    style: Theme.of(context).primaryTextTheme.headline5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.event_note),
+                  title: Text('Todo List'),
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
