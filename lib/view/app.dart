@@ -62,6 +62,8 @@ class _DrawerWidget extends StatelessWidget {
               leading: Icon(Icons.event_note),
               title: Text('Todo List'),
               onTap: () {
+                Provider.of<EnhanTodoViewModel>(context, listen: false).sliver =
+                    TodoList();
                 Navigator.pop(context);
               },
             ),
