@@ -20,26 +20,30 @@ class EnhanTodo extends StatelessWidget {
         home: ChangeNotifierProvider(
           create: (_) => EnhanTodoViewModel(TodoList()),
           child: Scaffold(
-            body: CustomScrollView(
-              slivers: <Widget>[
-                const SliverAppBar(
-                  flexibleSpace: const FlexibleSpaceBar(
-                    title: Text('EnhanTodo'),
-                  ),
-                  stretch: false,
-                  floating: true,
-                  pinned: false,
-                  snap: false,
-                ),
-                Consumer(
-                  builder: (_, EnhanTodoViewModel viewModel, __) =>
-                      viewModel.sliver,
-                ),
-              ],
-            ),
+            body: _ScrollWidget(),
             drawer: _DrawerWidget(),
           ),
         ),
+      );
+}
+
+class _ScrollWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => CustomScrollView(
+        slivers: <Widget>[
+          const SliverAppBar(
+            flexibleSpace: const FlexibleSpaceBar(
+              title: Text('EnhanTodo'),
+            ),
+            stretch: false,
+            floating: true,
+            pinned: false,
+            snap: false,
+          ),
+          Consumer(
+            builder: (_, EnhanTodoViewModel viewModel, __) => viewModel.sliver,
+          ),
+        ],
       );
 }
 
