@@ -5,9 +5,9 @@ class EnhanTodoViewModel extends ChangeNotifier {
 
   EnhanTodoViewModel(this._sliver);
 
-  get listView => _sliver;
+  get sliver => _sliver;
 
-  set listView(Widget sliver) {
+  set sliver(Widget sliver) {
     if (this._sliver == sliver) return;
     this._sliver = sliver;
     notifyListeners();
