@@ -8,7 +8,7 @@ class TodoList extends StatelessWidget {
             final itemIndex = index ~/ 2;
             if (index.isEven)
               return ListTile(
-                title: Text('task$itemIndex'),
+                title: Text('task${itemIndex + 1}'),
               );
             else
               return Divider(
@@ -20,6 +20,7 @@ class TodoList extends StatelessWidget {
             if (localIndex.isEven) return localIndex ~/ 2;
             return null;
           },
+          childCount: 50 * 2,
         ),
       );
 }
