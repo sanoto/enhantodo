@@ -54,13 +54,23 @@ LazyDatabase _openConnection() {
 
 @UseMoor(tables: [Todos, Categories, Schedules, Reminders])
 class EnhanTodoDatabase extends _$EnhanTodoDatabase {
-  EnhanTodoDatabase() : super(_openConnection());
+  EnhanTodoDatabase._internal() : super(_openConnection());
+
+  factory EnhanTodoDatabase() => _enhanTodoDatabase;
+
+  static final _enhanTodoDatabase = EnhanTodoDatabase._internal();
 
   @override
   int get schemaVersion => 1;
 
   Future<List<Todo>> get todoList => select(todos).get();
+  Stream<List<Todo>> get todoListStream => select(todos).watch();
   Future<List<Category>> get categoryList => select(categories).get();
   Future<List<Schedule>> get scheduleList => select(schedules).get();
   Future<List<Reminder>> get reminderList => select(reminders).get();
+
+  Future<int> createTodo(TodosCompanion todo) => into(todos).insert(todo);
+  Future updateTodo(Todo todo) => update(todos).replace(todo);
+  Future deleteTodo(int id) =>
+      (delete(todos)..where((todo) => todo.id.equals(id))).go();
 }

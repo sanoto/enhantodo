@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:enhantodo/viewmodel/app_viewmodel.dart';
 import 'package:enhantodo/view/todo_list.dart';
+import 'package:enhantodo/view/todo_detail.dart';
 
 class EnhanTodo extends StatelessWidget {
   @override
@@ -32,6 +33,7 @@ class EnhanTodo extends StatelessWidget {
           child: Scaffold(
             body: _ScrollWidget(),
             drawer: _DrawerWidget(),
+            floatingActionButton: _FabWidget(),
           ),
         ),
       );
@@ -91,4 +93,14 @@ class _DrawerWidget extends StatelessWidget {
           ],
         ),
       );
+}
+
+class _FabWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => FloatingActionButton(
+    onPressed: () => Navigator.push(context, MaterialPageRoute(
+      builder: (_) => TodoDetail('Detail'),
+    )),
+    child: const Icon(Icons.add),
+  );
 }
