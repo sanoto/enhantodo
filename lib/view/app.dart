@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:enhantodo/viewmodel/app_viewmodel.dart';
 import 'package:enhantodo/view/todo_list.dart';
@@ -17,6 +18,15 @@ class EnhanTodo extends StatelessWidget {
           primaryColor: Colors.blueGrey[800],
           accentColor: Colors.green,
         ),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', 'US'),
+          const Locale('ja', 'JP'),
+        ],
         home: ChangeNotifierProvider(
           create: (_) => EnhanTodoViewModel(TodoList()),
           child: Scaffold(
