@@ -42,7 +42,7 @@ class _ScrollWidget extends StatelessWidget {
   Widget build(BuildContext context) => CustomScrollView(
         slivers: <Widget>[
           const SliverAppBar(
-            flexibleSpace: const FlexibleSpaceBar(
+            flexibleSpace: FlexibleSpaceBar(
               title: Text('EnhanTodo'),
             ),
             stretch: false,
@@ -73,8 +73,8 @@ class _DrawerWidget extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.event_note),
-              title: Text('Todo List'),
+              leading: const Icon(Icons.event_note),
+              title: const Text('Todo List'),
               onTap: () {
                 Provider.of<EnhanTodoViewModel>(context, listen: false).sliver =
                     TodoList();
@@ -82,8 +82,8 @@ class _DrawerWidget extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 Navigator.pop(context);
               },
