@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:enhantodo/viewmodel/todo_detail_viewmodel.dart';
 import 'package:enhantodo/model/db.dart';
+import 'package:enhantodo/model/db_flutter_ext.dart';
 
 class TodoDetail extends StatelessWidget {
   final String _title;
@@ -25,6 +26,8 @@ class TodoDetail extends StatelessWidget {
                   children: <Widget>[
                     TodoTitleFormField(),
                     TodoDueDateField(),
+                    SizedBox(height: 10),
+                    TodoPriorityFormField(),
                     SizedBox(height: 10),
                     TodoBodyFormField(),
                     SizedBox(height: 10),
@@ -98,6 +101,42 @@ class TodoDueDateField extends StatelessWidget {
               },
             ),
           ],
+        ),
+      );
+}
+
+class TodoPriorityFormField extends StatelessWidget {
+  Widget priorityButton(
+          BuildContext context, Priority priority, bool isSelected) =>
+      Flexible(
+        flex: priority.flex,
+        child: RaisedButton(
+          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+          child: Text(
+            priority.text,
+            softWrap: true,
+            textAlign: TextAlign.center,
+            style: isSelected
+                ? null
+                : Theme.of(context)
+                    .textTheme
+                    .button
+                    .copyWith(color: Colors.black),
+          ),
+          color: isSelected ? priority.lightColor : priority.darkColor,
+          onPressed: () =>
+              Provider.of<TodoDetailViewModel>(context, listen: false)
+                  .priority = priority,
+        ),
+      );
+
+  @override
+  Widget build(BuildContext context) => Consumer<TodoDetailViewModel>(
+        builder: (_, TodoDetailViewModel viewModel, __) => Row(
+          children: Priority.values
+              .map((priority) => priorityButton(
+                  context, priority, priority == viewModel.priority))
+              .toList(),
         ),
       );
 }

@@ -1,3 +1,4 @@
+//import 'package:flutter/cupertino.dart';
 import 'package:moor/moor.dart';
 import 'package:moor_ffi/moor_ffi.dart';
 import 'package:path_provider/path_provider.dart';
@@ -64,7 +65,9 @@ class EnhanTodoDatabase extends _$EnhanTodoDatabase {
   int get schemaVersion => 1;
 
   Future<List<Todo>> get todoList => select(todos).get();
-  Stream<List<Todo>> get todoListStream => select(todos).watch();
+  Stream<List<Todo>> get todoListStream => (select(todos)
+        ..orderBy([(todo) => OrderingTerm(expression: todo.priority)]))
+      .watch();
   Future<List<Category>> get categoryList => select(categories).get();
   Future<List<Schedule>> get scheduleList => select(schedules).get();
   Future<List<Reminder>> get reminderList => select(reminders).get();

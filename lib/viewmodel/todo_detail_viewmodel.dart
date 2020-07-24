@@ -8,6 +8,7 @@ class TodoDetailViewModel extends ChangeNotifier {
   String title;
   String body;
   DateTime dueDate = DateTime.now();
+  Priority _priority = Priority.should;
   final Todo _oldTodo;
 
   TodoDetailViewModel([this._oldTodo]) : super() {
@@ -15,7 +16,14 @@ class TodoDetailViewModel extends ChangeNotifier {
       title = _oldTodo.title;
       body = _oldTodo.body;
       dueDate = _oldTodo.dueDate;
+      _priority = _oldTodo.priority;
     }
+  }
+
+  Priority get priority => _priority;
+  set priority(Priority p) {
+    _priority = p;
+    notifyListeners();
   }
 
   String get dueDateText => DateFormat.MMMd('ja_JP').add_Hm().format(dueDate);
@@ -50,13 +58,14 @@ class TodoDetailViewModel extends ChangeNotifier {
         title: Value(title),
         body: Value(body),
         dueDate: Value(dueDate),
-        priority: Value(Priority.must),
+        priority: Value(_priority),
       ));
     else
       EnhanTodoDatabase().updateTodo(_oldTodo.copyWith(
         title: title,
         body: body,
         dueDate: dueDate,
+        priority: _priority,
       ));
   }
 
